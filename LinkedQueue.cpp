@@ -19,13 +19,10 @@ void LQ_DestroyQueue(LinkedQueue* Queue)
 	free(Queue);
 }
 
-Node* LQ_CreateNode(const char* NewData)
+Node* LQ_CreateNode(ElementType NewData)
 {
-	Node* NewNode = (Node*)malloc(sizeof(Node));
-	NewNode->Data = (char*)malloc(strlen(NewData) + 1);
-
-	strcpy_s(NewNode->Data, strlen(NewData)+1, NewData);
-
+	Node* NewNode = new Node;
+	NewNode->Data = NewData;
 	NewNode->NextNode = nullptr;
 
     return NewNode;
@@ -33,8 +30,8 @@ Node* LQ_CreateNode(const char* NewData)
 
 void LQ_DestroyNode(Node* _Node)
 {
-	free(_Node->Data);
-	free(_Node);
+	delete _Node->Data;
+	delete _Node;
 }
 
 void LQ_Enqueue(LinkedQueue* Queue, Node* NewNode)
